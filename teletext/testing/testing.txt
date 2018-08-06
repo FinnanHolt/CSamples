@@ -1,0 +1,30 @@
+The main principle behind my testing method was that was necessary for the correct graphical output was for the graphics library to receive the correct data at the correct time. With this in mind, I was able to test my functions prior to intoducing SDL and still comprehensively test my program’s efficacy.
+
+Array creation testing was carried out by checking that certain known values corresponded to their correct position in the array.
+
+To test my data modification functions, I began by using asserts to ascertain that functions were changing the correct modes of my struct when they were supposed to. If an assert failed, I was able to insert a printf and see what the actaul value was. Using this method, I saw that, on the first pass, the function, reset_data, was attempting to initialize data->code to value array[i][j], when the variable j was not yet initialized.
+
+In cases where my functions did nothing but send data to SDL, I was able to check that they were sending the correct data, by modifying the function to return a value instead. This was useful for checking the functionality of my alpha_mode function.
+
+Other Techniques
+
+Special Cases:
+Although the graphical output drom the Engineering Test Page provided covered a lot of combination of numbers, it did not cover everything. Notably, it did not show the graphical output of a double height letter beneath a double height letter. This was a scenario that required special programming, so I felt it was necessary to prove that it was a graphical success. Similarly, I managed to implement functionality for a double height blast mode, which is demonstrated in the same grpahical testing window.
+
+Valgrind:
+Typing “make memchk” in the command line will compile and run valgrind with file “testteletext.c”.
+Running my code through valgrind was intended to check that all of my callocs had a respective free. I caught an error in my free function using this technique, whereby I was freeing all of the pointers to each array but not the pointer which was pointing to the array of pointers.
+Valgrind not only allowed me to check memory leaks but flagged up other errors that I would not
+have caught otherwise. I was able to correct more uninitialized values that I was attempting to use to in a conditional statement. I ran Valgrind in my main program with SDL and encountered some potential memory leaks, however as my non-SDL code was memory-leak-free, I felt sure that this was an issue with SDL itself.
+
+Splitting up Functions:
+Initially, many of my function were far too long and did far too much. In the early stages, one of my function carried out a mode select, a colour check and a colour change. Splitting functions like this into smaller ones made them less cumbersome to debug and easier to test. Testing the success of function y, contained within function x, before testing function x, allowed
+me to narrow down the causes of failure of function x
+
+Standard Checking:
+In more mundane sense, dedicating a significant proportion of my time testing, meant that I checked my code over more thoroughly. This allowed me  to :
+Alter tautological code which would have slowed down the program (if statements check by a previous if statement)
+Remove relics of previous code, such as functions that were no longer needed.
+Correct code which did not conform to the house style guidelines
+
+I would not say that I favoured one technique over the other, or that some methods were more weak than others. They all served a purpose to produce the highest quality code possible.

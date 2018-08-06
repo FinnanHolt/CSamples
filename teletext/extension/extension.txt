@@ -1,0 +1,9 @@
+Unfortunately, dealing with a rather time consuming bug in my double height function meant that I did not get as far with the extension as I had hoped.
+
+The main aim of my extension was to create a program that automatically converted any image into the teletext format. In practice, this required several steps, a couple of which I accomplished.
+
+Firstly, I needed to find software that would allow me to edit and analyse images within my C program. I found ImageMagick, which did exactly what I wanted. I installed MagickWand, which acts as a go-between between C and ImageMagick libraries. I was then able to use the MagickWand functions to compress any image to the correct width and height of my teletext window. Upon compression, I could now scan each pixel to obtain RGB values for each pixel in the image.
+
+After this, I planned to take an average of the sum of each RGB triplet. If the average was below 383 (the truncated midpoint of (R*G*B)/2), my pixel would be considered as a black pixel (closer to RGB (0,0,0)) and if above, it would be considerd white(closer to RGB(255,255,255)). I would then be able to convert the black pixels to blocks of black sixels, the white pixels to blocks of white sixels and render them to the screen using my ./teletext program.
+
+It would also be possible to increase the dimensions of the teletext window and increase the quality of the rendered image. 
